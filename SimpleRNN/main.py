@@ -1,4 +1,6 @@
 # step 1 - Import libraries and load models
+import os
+
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.datasets import imdb
@@ -10,7 +12,11 @@ word_index = imdb.get_word_index()
 reverse_word_index = {value: key for key, value in word_index.items()}
 
 # Load the trained model
-model = load_model('simple_rnn_imdb.h5')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(current_dir, 'simple_rnn_imdb.h5')
+
+model = load_model(model_path)
+# model = load_model('simple_rnn_imdb.h5')
 
 # step 2 - Define a function to preprocess the input text
 def decode_review(encoded_review):
